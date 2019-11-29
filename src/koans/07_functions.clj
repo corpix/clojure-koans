@@ -38,4 +38,21 @@
          (fn [n] (* n n))))
 
   "But they are often better written using the names of functions"
-  (= 25 (call 5 square)))
+  (= 25 (call 5 square))
+
+  "Functions could accept variable number of arguments"
+  (= '(1 2 3 4) ((fn [& rest] rest)
+                 1 2 3 4))
+
+  "Or have a bunch of required arguments and the rest"
+  (= '(1 2 (3 4 5 6)) ((fn [a b & rest] (list a b rest))
+                       1 2 3 4 5 6))
+
+  "Functions could accept keyword arguments"
+  (= '(1 2) ((fn [& {:keys [a b]}] (list a b))
+             :a 1 :b 2))
+
+  "And they could be optional"
+  (= '(1 3) ((fn [& {:keys [a b] :or {a 1 b 2}}]
+               (list a b))
+             :b 3)))
