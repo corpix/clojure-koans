@@ -17,7 +17,7 @@
      (drop 95 (range 100)))
 
   "Iteration provides an infinite lazy sequence"
-  (= '(1 2 4 8 16 32 64 128) (take 8 (iterate (fn [x] (* x 2)) 1)))
+  (= '(1 2 4 8 16 32 64 128) (take 8 (iterate #(* %1 2) 1)))
 
   "Repetition is key"
   (= [:a :a :a :a :a :a :a :a :a :a]
@@ -25,4 +25,4 @@
 
   "Iteration can be used for repetition"
   (= (repeat 100 "hello")
-     (take 100 (iterate (fn [_] "hello") "hello"))))
+     (take 100 (iterate identity "hello"))))
