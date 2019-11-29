@@ -2,28 +2,25 @@
   (:require [koan-engine.core :refer :all]))
 
 (defn hello
-  ([] "Hello World!")
-  ([a] (str "Hello, you silly " a "."))
+  ([]         "Hello World!")
+  ([a]        (str "Hello, you silly " a "."))
   ([a & more] (str "Hello to this group: "
-                   (apply str
-                          (interpose ", " (cons a more)))
-                   "!")))
+                   (apply str (interpose ", " (cons a more))) "!")))
 
-(defmulti diet (fn [x] (:eater x)))
-(defmethod diet :herbivore [a] __)
-(defmethod diet :carnivore [a] __)
-(defmethod diet :default [a] __)
+(defmulti  diet (fn [x] (get x :eater)))
+(defmethod diet :herbivore [a] (format "%s eats veggies."           (:name a)))
+(defmethod diet :carnivore [a] (format "%s eats animals."           (:name a)))
+(defmethod diet :default   [a] (format "I don't know what %s eats." (:name a)))
 
 (meditations
   "Some functions can be used in different ways - with no arguments"
-  (= __ (hello))
+  (= "Hello World!" (hello))
 
   "With one argument"
-  (= __ (hello "world"))
+  (= "Hello, you silly world." (hello "world"))
 
   "Or with many arguments"
-  (= __
-     (hello "Peter" "Paul" "Mary"))
+  (= "Hello to this group: Peter, Paul, Mary!" (hello "Peter" "Paul" "Mary"))
 
   "Multimethods allow more complex dispatching"
   (= "Bambi eats veggies."
