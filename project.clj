@@ -1,7 +1,8 @@
 (defproject clojure-koans "0.5.2-SNAPSHOT"
   :description "The Clojure koans."
-  :dependencies [[org.clojure/clojure "1.10.0"]
-                 [koan-engine "0.2.5"]]
+  :dependencies [[org.clojure/clojure    "1.10.0"]
+                 [org.clojure/core.match "0.3.0"]
+                 [koan-engine            "0.2.5"]]
   :dev-dependencies [[lein-koan "0.1.5"]]
   :profiles {:dev {:dependencies [[lein-koan "0.1.5"]]}}
   :repl-options {:init-ns koan-engine.runner
