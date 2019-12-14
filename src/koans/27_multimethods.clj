@@ -26,19 +26,21 @@
 
 (meditations
  "A multimethod takes an one or more arguments to dispatch on"
- (= __
+ (= "Hello, World!"
     (multimethod-without-args :first))
 
  "Though it can be ignored and represented by _ in defmethods"
- (= __
+ (= "Hello there"
     (multimethod-without-args :second))
 
  "Alternatively, we can use the arguments in defmethods"
- (= __
-    (multimethod-with-args :path-one {:first-opt 1
-                                      :second-opt 2}))
- 
+ (= 1
+    (multimethod-with-args
+     :path-one
+     {:first-opt 1 :second-opt 2}))
+
  "This allows us to something different in each method implementation"
- (= __
-    (multimethod-with-args :path-two {:first-opt 1
-                                      :second-opt [0 1 2]})))
+ (= 6
+    (multimethod-with-args
+     :path-two
+     {:first-opt 1 :second-opt [0 1 2]})))
